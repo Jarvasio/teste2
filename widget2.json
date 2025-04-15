@@ -1,0 +1,17 @@
+{
+    "name": "somaNumerosConfig",
+    "title": "Soma de Números (Configuração)",
+    "description": "Soma números definidos na configuração do widget.",
+    "icon": "calculator",
+    "height": 100,
+    "properties": [
+      {
+        "name": "numerosParaSomar",
+        "type": "string",
+        "label": "Números para somar",
+        "description": "Insere os números separados por vírgula (ex: 10, 20, 30)",
+        "default": "0"
+      }
+    ]
+  }
+  

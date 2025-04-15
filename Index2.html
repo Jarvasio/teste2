@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 1rem; }
+    #resultado { font-size: 1.5em; font-weight: bold; color: #2e8b57; }
+  </style>
+  <script>
+    function somarNumeros(entrada) {
+      if (!entrada) return 0;
+
+      const numeros = entrada
+        .split(",")
+        .map(n => parseFloat(n.trim()))
+        .filter(n => !isNaN(n));
+
+      return numeros.reduce((acc, val) => acc + val, 0);
+    }
+
+    function mostrarResultado(soma) {
+      const resultadoEl = document.getElementById("resultado");
+      resultadoEl.textContent = `Resultado da soma: ${soma}`;
+      // Enviar para o formulário principal
+      parent.postMessage({ type: "setAnswer", value: soma }, "*");
+    }
+
+    window.addEventListener("message", function (e) {
+      if (e.data.type === "ready") {
+        const entrada = window.properties.numerosParaSomar || "0";
+        const soma = somarNumeros(entrada);
+        mostrarResultado(soma);
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="resultado">A calcular...</div>
+</body>
+</html>
